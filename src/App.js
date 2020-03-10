@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from "react"
+import { Context } from "./ContextProvider"
+import "./App.css"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    const { answers, currentAnswer, setAnswer } = useContext(Context)
+    
+    //***
+    const spaces = currentAnswer.split("")
+    //***
+    const guesses = ["o", "t", "z"]
+    const correctGuesses = guesses.map(guess => spaces.includes(guess) || spaces.includes(guess.toUpperCase()) ? guess : false).filter(element => element)
+    console.log(correctGuesses)
+    //***
+    const spaceArr = spaces.map((space, i) => <div className="space" style={ space === " " ? {background: "rgba(0,0,0,0.1)", border: "none"} : correctGuesses.includes(space) || correctGuesses.includes(space.toLowerCase()) ? {background: "limeGreen", color: "rgba(0,0,0,0.5)"} : {background: "none"}} key={space + i} >{correctGuesses.includes(space) || correctGuesses.includes(space.toLowerCase()) ? space : ""}</div>)
+
+    return (
+        <div className="app-container"> 
+            <div 
+                className="current-answer-container" 
+                style={{
+                    display: "flex",
+                }}
+            >
+                {spaceArr}
+            </div>
+            <button onClick={() => setAnswer()}>start</button>
+        </div>
+    )
 }
 
-export default App;
+export default App
