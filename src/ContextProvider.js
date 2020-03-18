@@ -6,6 +6,9 @@ const Context = React.createContext()
 const ContextProvider = props => {
     const [ answers, setAnswers ] = useState(words)
     const [ currentAnswer, setCurrentAnswer ] = useState("")
+    const [ correctGuess, setCorrectGuess ] = useState([])
+    const [ guesses, setGuesses ] = useState([])
+    const [ currentGuess, setCurrentGuess ] = useState("")
 
     const getRandomInt = max => {
         return Math.floor(Math.random() * Math.floor(max));
@@ -17,8 +20,23 @@ const ContextProvider = props => {
         setCurrentAnswer(answers[number].word)
     }
 
+    const checkGuess = () => {
+        setGuesses(prevState => {
+            return [...prevState, currentGuess]
+        })
+        setCurrentGuess("")
+    }
+
     return (
-        <Context.Provider value={{answers, currentAnswer, setAnswer}}>
+        <Context.Provider value={{
+            answers, 
+            guesses,
+            currentAnswer, 
+            currentGuess, 
+            setAnswer, 
+            setCurrentGuess,
+            checkGuess
+        }}>
             {props.children}
         </Context.Provider>
     )

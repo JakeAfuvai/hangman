@@ -1,8 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .space {
-    width: 10pt; 
+    width: 25pt; 
     text-align: center; 
     margin: 2pt; 
     padding: 5pt; 
     border: 1pt rgba(0,0,0,0.2) solid; 
     border-radius: 5pt;
+}
+
+.alphabet-container {
+    display: grid;
+    grid-template-columns: repeat(7, 40pt);
+    grid-template-rows: repeat(4, 40pt);
+    justify-content: center;
+    align-items: center;
+    grid-template-areas: 
+        "a b c d e f g"
+        "h i j k l m n"
+        "o p q r s t u"
+        ". v w x y z ."
+    ;
+}
+
+.alphabet {
+    border: 1pt solid rgba(0,0,0,0.2);
+    border-radius: 4pt;
+    font-size: 15pt;
+    text-align: center;
+    text-justify: center;
+    width: 25pt;
+    height: 25pt;
+    margin: auto;
+    justify-self: center;
+    align-self: center;
+}
+
+button {
+    width: 100%;
 }
